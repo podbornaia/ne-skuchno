@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Нескучно — плакат-спичка</title>
+  <meta name="description" content="Тактильный интерактивный плакат: чиркни спичкой о тёрку и прожги кальку — под ней идея, чем заняться вечером.">
+  <meta name="theme-color" content="#15110e">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Нескучно — плакат-спичка">
+  <meta property="og:description" content="Чиркни спичкой и прожги кальку — под ней идея на вечер.">
+  <meta property="og:image" content="og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+    <div id="stage" class="stage">
+      <canvas id="poster" aria-label="Плакат, закрытый калькой"></canvas>
+      <canvas id="striker" aria-label="Тёрка"></canvas>
+    </div>
+  </main>
+
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <header class="brand ui">
+    <span class="brand__name">Нескучно</span>
+    <span class="brand__sub">№&nbsp;<span id="num">01</span> · плакат-спичка</span>
+  </header>
+
+  <nav class="tools ui" aria-label="Действия">
+    <button type="button" data-action="save"><span class="label">Сохранить</span><kbd>S</kbd></button>
+    <button type="button" data-action="reset"><span class="label">Новая калька</span><kbd>R</kbd></button>
+    <button type="button" data-action="next"><span class="label">Другой плакат</span><kbd>N</kbd></button>
+    <button type="button" data-action="sound" aria-pressed="true"><span class="label">Звук</span><kbd>M</kbd></button>
+    <div class="menu-wrap">
+      <button type="button" data-action="menu" aria-haspopup="menu" aria-expanded="false" aria-controls="menu"><span class="label">Загрузить</span><span class="caret" aria-hidden="true">▾</span></button>
+      <div class="menu" id="menu" role="menu" hidden>
+        <button type="button" role="menuitem" data-action="pickPoster"><span><b>Свой плакат…</b><small>ляжет под кальку</small></span><kbd>U</kbd></button>
+        <button type="button" role="menuitem" data-action="pickOverlay"><span><b>Рисунок на кальку…</b><small>наложится multiply, сгорит вместе с калькой</small></span><kbd>K</kbd></button>
+        <button type="button" role="menuitem" data-action="clearPoster" hidden><span><b>Убрать свой плакат</b></span></button>
+        <button type="button" role="menuitem" data-action="clearOverlay" hidden><span><b>Убрать рисунок с кальки</b></span></button>
+        <p class="menu__note"><span class="only-pointer">Можно просто перетащить файл в окно. </span>Картинки остаются только в твоём браузере.</p>
+      </div>
+    </div>
+  </nav>
+
+  <input type="file" id="filePoster" accept="image/*" hidden>
+  <input type="file" id="fileOverlay" accept="image/*" hidden>
+
+  <div id="drop" class="drop" hidden>
+    <div class="drop__zone" data-target="poster"><b>Плакат</b><span>ляжет под кальку</span></div>
+    <div class="drop__zone" data-target="overlay"><b>Рисунок на кальку</b><span>наложится multiply</span></div>
+  </div>
+
+  <p id="hint" class="hint" data-hidden aria-live="polite"></p>
+  <p id="toast" class="toast" data-hidden aria-live="polite"></p>
+
+  <div id="nogl" class="nogl" hidden>
+    <p>Этому браузеру не хватает WebGL2, чтобы зажечь спичку.<br>Открой страницу в свежем Chrome, Safari, Firefox или Edge.</p>
+  </div>
+
+  <noscript><div class="nogl"><p>Для спички нужен JavaScript.</p></div></noscript>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
